@@ -1,12 +1,14 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 
 /**
  * Un objeto de esta clase almacena los datos de un
  * festival.
  * Todo festival tiene un nombre, se celebra en un lugar
- * en una determinada fecha, dura una serie de días y
+ * en una determinada fecha, dura una serie de dï¿½as y
  * se engloba en un conjunto determinado de estilos
  *
  */
@@ -54,69 +56,69 @@ public class Festival {
     }
 
     /**
-     * devuelve el mes de celebración del festival, como
+     * devuelve el mes de celebraciï¿½n del festival, como
      * valor enumerado
      *
      */
     public Mes getMes() {
-        //TODO
-        
-        return null;
-        
+        return Mes.valueOf(fechaInicio.getMonth().name());
     }
 
-    /**
-     *
-     * @param otro
-     * @return true si el festival actual empieza
-     * en un fecha anterior a otro
-     */
-    public boolean empiezaAntesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
+    public boolean empiezaAntesQue(Festival otroFestival) {
+        return fechaInicio.isBefore(otroFestival.fechaInicio);
     }
 
-    /**
-     *
-     * @param otro
-     * @return true si el festival actual empieza
-     * en un fecha posteior a otro
-     */
-    public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
+    public boolean empiezaDespuesQue(LocalDate otroFestival) {
+        boolean after = fechaInicio.isAfter(otroFestival.fechaInicio);
+        return after;
     }
 
-    /**
-     *
-     * @return true si el festival ya ha concluido
-     */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
+        LocalDate hoy = LocalDate.now();
+        LocalDate fechaFin = fechaInicio.plusDays(duracion - 1);
+        return hoy.isAfter(fechaFin);
+    }
 
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String fechaInicioStr = fechaInicio.format(formatter);
+
+        StringBuilder result = new StringBuilder();
+        result.append(nombre).append(" ").append(estilos).append("\n")
+                .append(lugar.toUpperCase()).append("\n");
+
+        if (duracion == 1) {
+            result.append(fechaInicioStr);
+        } else {
+            LocalDate fechaFin = fechaInicio.plusDays(duracion - 1);
+            String fechaFinStr = fechaFin.format(formatter);
+            result.append(fechaInicioStr).append(" - ").append(fechaFinStr);
+        }
+
+        result.append(" (");
+        if (haConcluido()) {
+            result.append("concluido");
+        } else if (empiezaDespuesQue(LocalDate.now())) {
+            long diasRestantes = ChronoUnit.DAYS.between(LocalDate.now(), fechaInicio);
+            result.append("quedan ").append(diasRestantes).append(" dÃ­as");
+        } else {
+            result.append("ON");
+        }
+        result.append(")\n").append("-".repeat(60)).append("\n");
+
+        return result.toString();
     }
 
     /**
-     * Representación textual del festival, exactamente
+     * Representaciï¿½n textual del festival, exactamente
      * como se indica en el enunciado
      *
      */
-    @Override
-    public String toString() {
-       //TODO
-        
-        return null;
-        
-    }
+
 
     /**
-     * Código para probar la clase Festival
+     * Cï¿½digo para probar la clase Festival
      *
      */
     public static void main(String[] args) {
@@ -149,9 +151,9 @@ public class Festival {
         if (f1.empiezaAntesQue(f2)) {
             System.out.println(f1.getNombre() + " empieza antes que " + f2.getNombre());
         } else if (f1.empiezaDespuesQue(f2)) {
-            System.out.println(f1.getNombre() + " empieza después que " + f2.getNombre());
+            System.out.println(f1.getNombre() + " empieza despuï¿½s que " + f2.getNombre());
         } else {
-            System.out.println(f1.getNombre() + " empieza el mismo día que " + f2.getNombre());
+            System.out.println(f1.getNombre() + " empieza el mismo dï¿½a que " + f2.getNombre());
         }
 
         System.out.println("\nProbando haConcluido()\n");
