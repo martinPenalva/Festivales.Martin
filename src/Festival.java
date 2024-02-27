@@ -52,4 +52,63 @@ public class Festival {
         this.estilos.add(estilo);
 
     }
+    public Mes getMes() {
+        Mes mes = null;
+        switch(fechaInicio.getMonth())
+        {
+            case JANUARY:
+                mes = Mes.ENERO;
+                break;
+
+            case FEBRUARY:
+                mes = Mes.FEBRERO;
+                break;
+
+            case MARCH:
+                mes = Mes.MARZO;
+                break;
+
+            case APRIL:
+                mes = Mes.ABRIL;
+                break;
+
+            case MAY:
+                mes = Mes.MAYO;
+                break;
+
+            case JUNE:
+                mes = Mes.JUNIO;
+                break;
+
+            case JULY:
+                mes = Mes.JULIO;
+                break;
+
+            case AUGUST:
+                mes = Mes.AGOSTO;
+                break;
+
+            case SEPTEMBER:
+                mes = Mes.SEPTIEMBRE;
+                break;
+
+            case OCTOBER:
+                mes = Mes.OCTUBRE;
+                break;
+
+            case NOVEMBER:
+                mes = Mes.NOVIEMBRE;
+                break;
+
+            case DECEMBER:
+                mes = Mes.DICIEMBRE;
+                break;
+
+            default:
+                System.out.println("El mes no existe.");
+                break;
+
+        }
+        return mes;
+    }
 
