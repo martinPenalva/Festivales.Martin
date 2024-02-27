@@ -133,42 +133,55 @@ public class Festival {
         String mes1 = " ";
         switch (fechaInicio.getMonth()) {
             case JANUARY:
+
                 mes1 = "ene. ";
                 break;
             case FEBRUARY:
+
                 mes1 = "feb. ";
                 break;
             case MARCH:
+
                 mes1 = "mar. ";
                 break;
             case APRIL:
+
                 mes1 = "abr. ";
                 break;
             case MAY:
+
                 mes1 = "may. ";
                 break;
             case JUNE:
+
                 mes1 = "jun. ";
                 break;
             case JULY:
+
                 mes1 = "jul. ";
                 break;
             case AUGUST:
+
                 mes1 = "ago. ";
                 break;
             case SEPTEMBER:
+
                 mes1 = "sep. ";
                 break;
             case OCTOBER:
+
                 mes1 = "oct. ";
                 break;
             case NOVEMBER:
+
                 mes1 = "nov. ";
                 break;
             case DECEMBER:
+
                 mes1 = "dic. ";
                 break;
             default:
+
                 System.out.println("El mes no existe.");
                 break;
         }
@@ -192,47 +205,75 @@ public class Festival {
             LocalDate nuevo = fechaInicio.plusDays(duracion);
             switch (nuevo.getMonth()) {
                 case JANUARY:
+
                     mes2 = " ene.";
                     break;
                 case FEBRUARY:
+
                     mes2 = " feb.";
                     break;
                 case MARCH:
+
                     mes2 = " mar.";
                     break;
                 case APRIL:
+
                     mes2 = " abr.";
                     break;
                 case MAY:
+
                     mes2 = " may.";
                     break;
                 case JUNE:
+
                     mes2 = " jun.";
                     break;
                 case JULY:
+
                     mes2 = " jul.";
                     break;
                 case AUGUST:
+
                     mes2 = " ago.";
                     break;
                 case SEPTEMBER:
+
                     mes2 = " sep.";
                     break;
                 case OCTOBER:
+
                     mes2 = " oct.";
                     break;
                 case NOVEMBER:
+
                     mes2 = " nov.";
                     break;
                 case DECEMBER:
+
                     mes2 = " dic.";
                     break;
                 default:
+
                     System.out.println("El mes no existe.");
                     break;
             }
+            if (haConcluido())
+            {
+                return nombre +  "\t\t\t" + getEstilos() + "\n" + lugar + "\n" + fechaInicio.getDayOfMonth() + " " + mes1 + " - " + fechaInicio.plusDays(duracion).getDayOfMonth() + mes2 + " " + fechaInicio.getYear() + " (concluido)" + "\n------------------------------------------------------------";
+            }
+            else if (fechaInicio.isBefore(LocalDate.now()) && fechaInicio.plusDays(duracion).isAfter(LocalDate.now()) || fechaInicio.equals(LocalDate.now()) || fechaInicio.plusDays(duracion).equals(LocalDate.now()))
+            {
+                return nombre +  "\t\t\t" + getEstilos() + "\n" + lugar + "\n" + fechaInicio.getDayOfMonth() + " " + mes1 + " - " + fechaInicio.plusDays(duracion).getDayOfMonth() + mes2 + " " + fechaInicio.plusDays(duracion).getYear() + " (ON)" + "\n------------------------------------------------------------";
+            }
+            else
+            {
+                return nombre +  "\t\t\t" + getEstilos() + "\n" + lugar + "\n" + fechaInicio.getDayOfMonth() + " " + mes1 + " - " + fechaInicio.plusDays(duracion).getDayOfMonth() + mes2 + " " + fechaInicio.plusDays(duracion).getYear() + " Quedan: " + (LocalDate.now().getDayOfYear() - fechaInicio.getDayOfYear()) + " dias." + "\n------------------------------------------------------------";
+            }
+        }
+    }
 
-            public static void main(String[] args) {
+
+    public static void main(String[] args) {
             System.out.println("Probando clase Festival");
             String datosFestival = "Gazpatxo Rock : " +
                     "valencia: 28-02-2022  :1  :rock" +
