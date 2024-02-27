@@ -128,6 +128,50 @@ public class Festival {
 
         return this.fechaInicio.plusDays(duracion).isBefore(LocalDate.now());
     }
+    public String toString() {
+
+        String mes1 = " ";
+        switch (fechaInicio.getMonth()) {
+            case JANUARY:
+                mes1 = "ene. ";
+                break;
+            case FEBRUARY:
+                mes1 = "feb. ";
+                break;
+            case MARCH:
+                mes1 = "mar. ";
+                break;
+            case APRIL:
+                mes1 = "abr. ";
+                break;
+            case MAY:
+                mes1 = "may. ";
+                break;
+            case JUNE:
+                mes1 = "jun. ";
+                break;
+            case JULY:
+                mes1 = "jul. ";
+                break;
+            case AUGUST:
+                mes1 = "ago. ";
+                break;
+            case SEPTEMBER:
+                mes1 = "sep. ";
+                break;
+            case OCTOBER:
+                mes1 = "oct. ";
+                break;
+            case NOVEMBER:
+                mes1 = "nov. ";
+                break;
+            case DECEMBER:
+                mes1 = "dic. ";
+                break;
+            default:
+                System.out.println("El mes no existe.");
+                break;
+        }
 
 
 
