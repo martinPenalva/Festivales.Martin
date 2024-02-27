@@ -172,6 +172,111 @@ public class Festival {
                 System.out.println("El mes no existe.");
                 break;
         }
+        if (getDuracion() == 1) {
+            if (haConcluido())
+            {
+                return nombre + "\t\t\t" + getEstilos() + "\n" + lugar + "\n" + fechaInicio.getDayOfMonth() + " " + mes1 + " " + fechaInicio.getYear() + " (concluido)" + "\n------------------------------------------------------------";
+            }
+            else if (fechaInicio.equals(LocalDate.now()))
+            {
+                return nombre + "\t\t\t" + getEstilos() + "\n" + lugar + "\n" + fechaInicio.getDayOfMonth() + " " + mes1 + " " + fechaInicio.getYear() + " (ON)" + "\n------------------------------------------------------------";
+            }
+            else
+            {
+                return nombre + "\t\t\t" + getEstilos() + "\n" + lugar + "\n" + fechaInicio.getDayOfMonth() + " " + mes1 + " " + fechaInicio.getYear() + "Quedan " + (LocalDate.now().getDayOfYear() - fechaInicio.getDayOfYear()) + " dias" + "\n------------------------------------------------------------";
+            }
+        }
+        else
+        {
+            String mes2 = "";
+            LocalDate nuevo = fechaInicio.plusDays(duracion);
+            switch (nuevo.getMonth()) {
+                case JANUARY:
+                    mes2 = " ene.";
+                    break;
+                case FEBRUARY:
+                    mes2 = " feb.";
+                    break;
+                case MARCH:
+                    mes2 = " mar.";
+                    break;
+                case APRIL:
+                    mes2 = " abr.";
+                    break;
+                case MAY:
+                    mes2 = " may.";
+                    break;
+                case JUNE:
+                    mes2 = " jun.";
+                    break;
+                case JULY:
+                    mes2 = " jul.";
+                    break;
+                case AUGUST:
+                    mes2 = " ago.";
+                    break;
+                case SEPTEMBER:
+                    mes2 = " sep.";
+                    break;
+                case OCTOBER:
+                    mes2 = " oct.";
+                    break;
+                case NOVEMBER:
+                    mes2 = " nov.";
+                    break;
+                case DECEMBER:
+                    mes2 = " dic.";
+                    break;
+                default:
+                    System.out.println("El mes no existe.");
+                    break;
+            }
+
+            public static void main(String[] args) {
+            System.out.println("Probando clase Festival");
+            String datosFestival = "Gazpatxo Rock : " +
+                    "valencia: 28-02-2022  :1  :rock" +
+                    ":punk " +
+                    ": hiphop ";
+            Festival f1 = FestivalesIO.parsearLinea(datosFestival);
+            System.out.println(f1);
+
+            datosFestival = "black sound fest:badajoz:05-02-2022:  21" +
+                    ":rock" + ":  blues";
+            Festival f2 = FestivalesIO.parsearLinea(datosFestival);
+            System.out.println(f2);
+
+            datosFestival = "guitar bcn:barcelona: 28-01-2022 :  170" +
+                    ":indie" + ":pop:fusion";
+            Festival f3 = FestivalesIO.parsearLinea(datosFestival);
+            System.out.println(f3);
+
+            datosFestival = "  benidorm fest:benidorm:26-01-2022:3" +
+                    ":indie" + ": pop  :rock";
+            Festival f4 = FestivalesIO.parsearLinea(datosFestival);
+            System.out.println(f4);
+
+
+            System.out.println("\nProbando empiezaAntesQue() empiezaDespuesQue()" +
+                    "\n");
+            if (f1.empiezaAntesQue(f2)) {
+                System.out.println(f1.getNombre() + " empieza antes que " + f2.getNombre());
+            } else if (f1.empiezaDespuesQue(f2)) {
+                System.out.println(f1.getNombre() + " empieza despu�s que " + f2.getNombre());
+            } else {
+                System.out.println(f1.getNombre() + " empieza el mismo d�a que " + f2.getNombre());
+            }
+
+            System.out.println("\nProbando haConcluido()\n");
+            System.out.println(f4);
+            System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
+            System.out.println(f1);
+            System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
+            System.out.println(f1.getMes());
+
+
+        }
+        }
 
 
 
