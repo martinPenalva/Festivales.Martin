@@ -111,4 +111,23 @@ public class Festival {
         }
         return mes;
     }
+    public boolean empiezaAntesQue(Festival otro) {
+        //hecho
+
+        return this.fechaInicio.isBefore(otro.fechaInicio);
+    }
+
+
+    public boolean empiezaDespuesQue(Festival otro) {
+        //hecho
+
+        return this.fechaInicio.isAfter(otro.fechaInicio);
+    }
+    public boolean haConcluido() {
+        //hecho
+
+        return this.fechaInicio.plusDays(duracion).isBefore(LocalDate.now());
+    }
+
+
 
