@@ -31,8 +31,9 @@ public class FestivalesIO {
         }
 
     }
+
     public static Festival parsearLinea(String lineaFestival) {
-        //TODO
+        //Terminado
 
         String lugar = "";
         String nom2 = "";
@@ -40,23 +41,34 @@ public class FestivalesIO {
         int duracion = 0;
         HashSet<Estilo> estilo = new HashSet<>();
         String[] festival = lineaFestival.split(":");
-        for (int pos = 0;pos<festival.length;pos++)
-        {
-            if (pos == 0)
-            {
-                String nombre1 = festival[pos].trim();
+        for (int pos = 0; pos < festival.length; pos++) {
+            if (pos == 0) {
+                String nom1 = festival[pos].trim();
                 int descartes = 0;
-                for (int letra =0;letra<nombre1.length();letra++)
-                {
-                    if (letra == 0)
-                    {nom2 = nom2 + nombre1.toUpperCase().charAt(letra);
+                for (int letra = 0; letra < nom1.length(); letra++) {
+                    if (letra == 0) {
+                        nom2 = nom2 + nom1.toUpperCase().charAt(letra);
 
-                    }
-
-                    else if (nombre1.charAt(letra) == ' ')
-                    {
+                    } else if (nom1.charAt(letra) == ' ') {
                         descartes = letra + 1;
                         nom2 = nom2 + " ";
-                        nom2 = nom2 + nombre1.toUpperCase().charAt(descartes);
+                        nom2 = nom2 + nom1.toUpperCase().charAt(descartes);
+                    } else if (letra != descartes) {
+                        nom2 = nom2 + nom1.charAt(letra);
                     }
+                }
+            } else if (pos == 1) {
+                lugar = festival[pos].toUpperCase().trim();
+            } else if (pos == 2) {
+                fechaInicio = LocalDate.parse(festival[pos].trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            } else if (pos == 3) {
+                duracion = Integer.parseInt(festival[pos].trim());
+            } else {
+                Estilo miEstilo = Estilo.valueOf(festival[pos].toUpperCase().trim());
+                estilo.add(miEstilo);
+            }
+        }
+        return new Festival(nom2, lugar, fechaInicio, duracion, estilo);
+    }
+}
 
